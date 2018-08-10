@@ -37,7 +37,7 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="bootstrap-4/css/bootstrap.min.css">
   <link rel="stylesheet" href="style/main.css">
-  <title>Exercise 2, ITGM-727</title>
+  <title>Migratrak, ITGM-727</title>
   </head>
 
   <body>
@@ -49,86 +49,60 @@
     <!-- APP NAV BAR -->
     <?php include 'includes/header.php'; ?>
 
-    <div class="container">
+    <div class="container mb-5">
 
-
-      <div class="row justify-content-center mt-5 mb-3">
-        <div class="col-5">
-          <p class="text-secondary"><strong>Welcome to the Guestbook!</strong><br />
-            <?php
-              // Change our welcome message base of if there are entries or not...
-              if (empty($entries)) {
-                echo "Please look around, and be the first to sign our guestbook.";
-              } else {
-                echo "Explore other's comments, or make one yourself.";
-              }
-            ?>
-
-          </p>
+      <!-- Jumbotron -->
+      <div class="row mt-3">
+        <div class="offset-md-1 col-md-10">
+          <div class="jumbotron bg-white mb-0 pb-2">
+            <h1 class="display-5">Welcome!</h1>
+            <p class="lead">
+              <strong>Migratrak makes recording a migraine a breeze.</strong>
+              If diaries and pen and paper notes no longer work for you,
+              Migratrak provides a simple and clean interface.</p>
+            <hr class="brain" />
+          </div>
         </div>
       </div>
 
-      <?php
+      <div class="row justify-content-center">
+        <div id="signup-block" class="col-6 p-4">
 
-      // Loop thru entry data
-      foreach ($entries as $entryItem) {
+          <h1 class="h3 mb-5">Give it a try!</h1>
 
-        /**
-        * $entryItem[0] - Name
-        * $entryItem[1] - Email
-        * $entryItem[2] - Create date
-        * $entryItem[3] - Guestbook message
-        * $entryItem[4] - Image path
-        */
+          <!-- SIGNUP FORM -->
+          <form action="index.php" method="post" enctype="multipart/form-data">
 
-        // Check for image avatar
-        if (isset($entryItem[4])) {
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="">First name</label>
+                  <input type="text" class="form-control" name="form-text-fname" placeholder="">
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="">Last name</label>
+                  <input type="text" class="form-control" name="form-text-lname" placeholder="">
+                </div>
+              </div>
+            </div>
 
-          // If it exists, store in variable
-          $avatarImagePath = $entryItem[4];
-          $initials = '';
-        } else {
+            <div class="form-group">
+              <label for="">Email address</label>
+              <input type="email" class="form-control" name="form-text-email" required placeholder="">
+            </div>
 
-          // If not, get initials of Name...
-          $avatarImagePath = '';
+            <div class="form-group">
+              <label for="">Password</label>
+              <input type="password" class="form-control" name="form-text-password" required placeholder="">
+            </div>
 
-          // Pull first letter from each word. Use this to get user's initials. Returns array.
-          preg_match_all("/[A-Z]/", ucwords(strtolower($entryItem[0])), $matches);
-          // convert array to string
-          $initials = implode("", $matches[0]);
-        }
+            <button type="submit" name="submit" class="btn btn-info btn-lg mt-2">Sign up</button>
+          </form>
 
-        // Print data in comment HTML template
-        echo "
-        <!-- COMMENT -->
-        <div class='row'>
-          <div class='col'>
-            <div class='comment shadow-sm p-3 mb-5 bg-white rounded'>
-              <div class='container'>
-                <div class='row'>
-                  <div class='col-2 d-sm-none d-md-block'>
-                    <div class='avatar' style='background-image:url($avatarImagePath)'>$initials</div>
-                  </div>
-                  <div class='col'>
-                    <div class='row'>
-                      <div class='col name'>
-                        <a href='mailto:$entryItem[1]'>$entryItem[0]</a>
-                        <span class='low-priority-text'>says</span></div>
-                      <div class='col date text-muted'>$entryItem[2]</div>
-                    </div> <!-- END OF name/date row -->
-                    <div class='comment-body text-secondary mt-2'>
-                      $entryItem[3]
-                    </div>
-                  </div>
-                </div><!-- END OF .comment .container .row -->
-              </div><!-- END OF .comment .container -->
-            </div><!-- END OF .comment -->
-          </div><!-- END OF .col -->
-        </div><!-- END OF .row -->";
-
-      }
-
-      ?>
+        </div> <!-- END OF .col-7 -->
+      </div> <!-- END OF .row -->
 
     </div> <!-- END OF .contaner -->
   </body>
