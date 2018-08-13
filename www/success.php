@@ -55,11 +55,9 @@
       <div class="row">
         <div class="offset-md-1 col-md-10">
           <div class="jumbotron bg-white mb-0 pb-2">
-            <h1 class="display-5">Welcome!</h1>
+            <h1 class="display-5">Success!</h1>
             <p class="lead">
-              <strong>Migratrak makes recording a migraine a breeze.</strong>
-              If diaries and pen and paper notes no longer work for you,
-              Migratrak provides a simple and clean interface.</p>
+              You're all signed up. Log in below.</p>
             <hr class="brain" />
           </div>
         </div>
@@ -68,18 +66,28 @@
       <div class="row justify-content-center">
         <div id="signup-block" class="col-6 p-4">
 
-          <h1 class="h3 mb-5">Give it a try!</h1>
+          <h1 class="h3 mb-5">Log in</h1>
 
           <!-- SIGNUP FORM -->
-          <form action="index.php" method="post" enctype="multipart/form-data">
-            <?php include '../includes/signup.php'; ?>
+          <form action="" method="post" enctype="multipart/form-data">
+
+            <div class="form-group">
+              <label for="">Email address</label>
+              <input type="email" class="form-control" name="form-text-email" required placeholder="">
+            </div>
+
+            <div class="form-group">
+              <label for="">Password</label>
+              <input type="password" class="form-control" name="form-text-password" required placeholder="">
+            </div>
+
+            <button type="submit" name="submit" class="btn btn-primary btn-lg mt-2">Log in</button>
           </form>
 
         </div> <!-- END OF .col-7 -->
       </div> <!-- END OF .row -->
 
     </div> <!-- END OF .contaner -->
-
     <?php include 'includes/footer.php'; ?>
   </body>
 

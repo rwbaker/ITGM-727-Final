@@ -19,3 +19,17 @@ hr.brain {
 #signup-block {
   background: #EBF7F9;
 }
+
+.btn-primary {
+  background:#3AB6CB;
+  border-color:#3AB6CB;
+}
+.btn-primary:hover {
+  background:#29A5BA;
+  border-color:#29A5BA;
+}
+
+/* OVERRIDES */
+.text-muted {
+  color:#9B9B9B !important;
+}
