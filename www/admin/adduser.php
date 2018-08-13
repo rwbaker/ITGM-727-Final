@@ -45,7 +45,7 @@
     <script src="../bootstrap-4/js/bootstrap.bundle.min.js"></script>
 
     <!-- APP NAV BAR -->
-    <?php include '../includes/header.php'; ?>
+    <?php include '../includes/header-admin.php'; ?>
 
     <div class="container mb-5 mt-3">
 
