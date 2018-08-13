@@ -47,12 +47,27 @@
     <!-- APP NAV BAR -->
     <?php include '../includes/header-private.php'; ?>
 
+    <div class="container mt-1 px-0">
+      <div class="row">
+        <div class="col">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-white">
+              <li class="breadcrumb-item"><a href="#">Your Migraines</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Migraine #0000-00</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+
+
+
     <div class="container mb-5 mt-3">
 
       <div class="row">
         <div id="migraine-details" class="col">
 
-          <h1 class="h3 mt-5 mb-3">Migraine #0000-00</h1>
+          <h1 class="h3 mb-3">Migraine #0000-00</h1>
 
           <!-- DATA -->
           <div class="row border-top border-bottom py-3">
