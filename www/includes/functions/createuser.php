@@ -17,10 +17,13 @@ function createUser($firstname, $lastname, $email, $password) {
   require_once "includes/helpers/config.php";
 
   // Prepare an insert statement
-  $stmt = mysqli_prepare($link, "INSERT INTO user (first_name, last_name, email, password) VALUES (?, ?, ?, ?)");
+  $stmt = mysqli_prepare($link, "INSERT INTO user (first_name, last_name, email, password_hash) VALUES (?, ?, ?, ?)");
 
   // Bind variables to the prepared statement as parameters
-  mysqli_stmt_bind_param($stmt, "ssss", $firstname, $lastname, $email, $password);
+  mysqli_stmt_bind_param($stmt, "ssss", $firstname, $lastname, $email, $param_password);
+
+  // Set parameters
+  $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
 
   /* execute prepared statement */
   mysqli_stmt_execute($stmt);
