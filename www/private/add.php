@@ -106,17 +106,13 @@
               <label for="">Location</label>
               <select id="inputLocation" class="form-control">
                 <option>Front</option>
-                <option>Front left</option>
-                <option>Front right</option>
                 <option>Back</option>
-                <option>Back left</option>
-                <option>Back right</option>
                 <option>Right</option>
                 <option>Left</option>
               </select>
             </div>
 
-            <div class="form-group">
+            <!-- <div class="form-group">
               <label for="">Current Weather</label>
               <select id="inputWeather" class="form-control">
                 <option>Sunny</option>
@@ -124,7 +120,7 @@
                 <option>Foggy</option>
                 <option>Rainy</option>
               </select>
-            </div>
+            </div> -->
 
             <div class="form-group">
               <label for="">Notes</label>
