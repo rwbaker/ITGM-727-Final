@@ -80,19 +80,20 @@ CONSTRAINT `FK_99` FOREIGN KEY `fkIdx_99` (`user_id`) REFERENCES `user` (`user_i
 
 
 -- ************************************** `migraine`
-
 CREATE TABLE `migraine`
 (
- `migraine_id`      INT NOT NULL AUTO_INCREMENT ,
- `location_id`      INTEGER NOT NULL ,
- `user_id`          INTEGER NOT NULL ,
- `start_time`       DATETIME NOT NULL ,
- `end_time`         DATETIME NOT NULL ,
- `weather`          VARCHAR(1024) NOT NULL ,
- `duration`         VARCHAR(256) NOT NULL ,
- `severity`         VARCHAR(256) NOT NULL ,
- `severity_type_id` INTEGER NOT NULL ,
- `notes`            VARCHAR(2048) NOT NULL ,
+  `migraine_id` int(11) NOT NULL,
+  `location_id` int(11) DEFAULT NULL,
+  `severity_type_id` int(11) DEFAULT NULL,
+  `user_id` int(11) NOT NULL,
+  `start_time` datetime NOT NULL,
+  `end_time` datetime DEFAULT NULL,
+  `location` varchar(256) DEFAULT NULL,
+  `weather` varchar(256) DEFAULT NULL,
+  `duration` varchar(256) DEFAULT NULL,
+  `severity` varchar(256) DEFAULT NULL,
+  `remedy` varchar(256) DEFAULT NULL,
+  `notes` varchar(2048) DEFAULT NULL,
 
 PRIMARY KEY (`migraine_id`, `user_id`),
 KEY `fkIdx_47` (`user_id`),
