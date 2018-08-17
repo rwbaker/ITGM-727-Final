@@ -31,80 +31,79 @@
       exit;
   }
 
-  // Create Vars
-  $severity = array();
-  $locations = array();
-  $remedies = array();
-
-  // Include config file
-  // require_once "../includes/helpers/config.php";
-
-  // Function to get Severities from DB
-  // ----------------------------------------------------------------------------
-      // Include config file
-      require_once "../includes/helpers/config.php";
-
-      // Prepare a select statement
-      $sql = "SELECT * FROM `severity_id`";
-      if ($stmt = mysqli_prepare($link, $sql)) {
-          /* execute statement */
-          mysqli_stmt_execute($stmt);
-          /* bind result variables */
-          mysqli_stmt_bind_result($stmt, $id, $sev);
-          /* fetch values */
-          while (mysqli_stmt_fetch($stmt)) {
-              // printf("%s (%s)\n", $id, $sev);
-              $severity[$id] = $sev;
-          }
-          /* close statement */
-          mysqli_stmt_close($stmt);
-      }
-      /* close connection */
-      // mysqli_close($link);
 
 
-  // Function to get Remedy from DB
-  // ----------------------------------------------------------------------------
-      // Prepare a select statement
-      $sql = "SELECT * FROM `remedy_types`";
-      if ($stmt = mysqli_prepare($link, $sql)) {
-          /* execute statement */
-          mysqli_stmt_execute($stmt);
-          /* bind result variables */
-          mysqli_stmt_bind_result($stmt, $id, $rem);
-          /* fetch values */
-          while (mysqli_stmt_fetch($stmt)) {
-              // printf("%s (%s)\n", $id, $rem);
-              $remedies[$id] = $rem;
-          }
-          /* close statement */
-          mysqli_stmt_close($stmt);
-      }
-      /* close connection */
-      // mysqli_close($link);
-
-  // Function to get Locations from DB
-  // ----------------------------------------------------------------------------
-      // Include config file
-      // require_once "../includes/helpers/config.php";
-
-      // Prepare a select statement
-      $sql = "SELECT * FROM `migraine_location`";
-      if ($stmt = mysqli_prepare($link, $sql)) {
-          /* execute statement */
-          mysqli_stmt_execute($stmt);
-          /* bind result variables */
-          mysqli_stmt_bind_result($stmt, $id, $loc);
-          /* fetch values */
-          while (mysqli_stmt_fetch($stmt)) {
-              // printf("%s (%s)\n", $id, $loc);
-              $locations[$id] = $loc;
-          }
-          /* close statement */
-          mysqli_stmt_close($stmt);
-      }
-      /* close connection */
-      mysqli_close($link);
+  // // Create Vars
+  // $severity = array();
+  // $locations = array();
+  // $remedies = array();
+  //
+  // // Function to get Severities from DB
+  // // ----------------------------------------------------------------------------
+  //     // Include config file
+  //     require_once "../includes/helpers/config.php";
+  //
+  //     // Prepare a select statement
+  //     $sql = "SELECT * FROM `severity_id`";
+  //     if ($stmt = mysqli_prepare($link, $sql)) {
+  //         /* execute statement */
+  //         mysqli_stmt_execute($stmt);
+  //         /* bind result variables */
+  //         mysqli_stmt_bind_result($stmt, $id, $sev);
+  //         /* fetch values */
+  //         while (mysqli_stmt_fetch($stmt)) {
+  //             // printf("%s (%s)\n", $id, $sev);
+  //             $severity[$id] = $sev;
+  //         }
+  //         /* close statement */
+  //         mysqli_stmt_close($stmt);
+  //     }
+  //     /* close connection */
+  //     // mysqli_close($link);
+  //
+  //
+  // // Function to get Remedy from DB
+  // // ----------------------------------------------------------------------------
+  //     // Prepare a select statement
+  //     $sql = "SELECT * FROM `remedy_types`";
+  //     if ($stmt = mysqli_prepare($link, $sql)) {
+  //         /* execute statement */
+  //         mysqli_stmt_execute($stmt);
+  //         /* bind result variables */
+  //         mysqli_stmt_bind_result($stmt, $id, $rem);
+  //         /* fetch values */
+  //         while (mysqli_stmt_fetch($stmt)) {
+  //             // printf("%s (%s)\n", $id, $rem);
+  //             $remedies[$id] = $rem;
+  //         }
+  //         /* close statement */
+  //         mysqli_stmt_close($stmt);
+  //     }
+  //     /* close connection */
+  //     // mysqli_close($link);
+  //
+  // // Function to get Locations from DB
+  // // ----------------------------------------------------------------------------
+  //     // Include config file
+  //     // require_once "../includes/helpers/config.php";
+  //
+  //     // Prepare a select statement
+  //     $sql = "SELECT * FROM `migraine_location`";
+  //     if ($stmt = mysqli_prepare($link, $sql)) {
+  //         /* execute statement */
+  //         mysqli_stmt_execute($stmt);
+  //         /* bind result variables */
+  //         mysqli_stmt_bind_result($stmt, $id, $loc);
+  //         /* fetch values */
+  //         while (mysqli_stmt_fetch($stmt)) {
+  //             // printf("%s (%s)\n", $id, $loc);
+  //             $locations[$id] = $loc;
+  //         }
+  //         /* close statement */
+  //         mysqli_stmt_close($stmt);
+  //     }
+  //     /* close connection */
+  //     mysqli_close($link);
 
 
 
@@ -173,10 +172,20 @@
               <label for="">Severity</label>
               <select id="inputSeverity" class="form-control">
                 <option label=" "></option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
                 <?php
-                  foreach ($severity as $key => $value):
-                    echo '<option value="'.$key.'">'.$value.'</option>';
-                  endforeach;
+                  // foreach ($severity as $key => $value):
+                  //   echo '<option value="'.$key.'">'.$value.'</option>';
+                  // endforeach;
                 ?>
               </select>
             </div>
@@ -185,10 +194,14 @@
               <label for="">Location</label>
               <select id="inputLocation" class="form-control">
                 <option label=" "></option>
+                <option value="Front">Front</option>
+                <option value="Back">Back</option>
+                <option value="Left">Left</option>
+                <option value="Right">Right</option>
                 <?php
-                  foreach ($locations as $key => $value):
-                    echo '<option value="'.$key.'">'.$value.'</option>';
-                  endforeach;
+                  // foreach ($locations as $key => $value):
+                  //   echo '<option value="'.$key.'">'.$value.'</option>';
+                  // endforeach;
                 ?>
               </select>
             </div>
@@ -208,10 +221,12 @@
               <label for="">Remedy</label>
               <select id="inputLocation" class="form-control">
                 <option label=" "></option>
+                <option value="Imitrex">Imitrex</option>
+                <option value="Ibuprofen">Ibuprofen</option>
                 <?php
-                  foreach ($remedies as $key => $value):
-                    echo '<option value="'.$key.'">'.$value.'</option>';
-                  endforeach;
+                  // foreach ($remedies as $key => $value):
+                  //   echo '<option value="'.$key.'">'.$value.'</option>';
+                  // endforeach;
                 ?>
               </select>
             </div>
