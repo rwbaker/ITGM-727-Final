@@ -4,7 +4,7 @@
 
 CREATE TABLE `severity_id`
 (
- `severity_type_id` INTEGER NOT NULL ,
+ `severity_type_id` INT NOT NULL AUTO_INCREMENT ,
  `severity_type`    VARCHAR(256) NOT NULL ,
 
 PRIMARY KEY (`severity_type_id`)
@@ -18,7 +18,7 @@ PRIMARY KEY (`severity_type_id`)
 
 CREATE TABLE `remedy_types`
 (
- `remedy_id`   INTEGER NOT NULL ,
+ `remedy_id`   INT NOT NULL AUTO_INCREMENT ,
  `remedy_type` VARCHAR(256) NOT NULL ,
 
 PRIMARY KEY (`remedy_id`)
@@ -32,7 +32,7 @@ PRIMARY KEY (`remedy_id`)
 
 CREATE TABLE `migraine_location`
 (
- `location_id`   INTEGER NOT NULL ,
+ `location_id`   INT NOT NULL AUTO_INCREMENT ,
  `location_name` VARCHAR(256) NOT NULL ,
 
 PRIMARY KEY (`location_id`)
@@ -66,7 +66,7 @@ PRIMARY KEY (`user_id`)
 
 CREATE TABLE `user_types`
 (
- `user_type_id` INTEGER NOT NULL ,
+ `user_type_id` INT NOT NULL AUTO_INCREMENT ,
  `user_id`      INTEGER NOT NULL ,
  `user_type`    VARCHAR(256) NOT NULL ,
 
@@ -83,7 +83,7 @@ CONSTRAINT `FK_99` FOREIGN KEY `fkIdx_99` (`user_id`) REFERENCES `user` (`user_i
 
 CREATE TABLE `migraine`
 (
- `migraine_id`      INTEGER NOT NULL ,
+ `migraine_id`      INT NOT NULL AUTO_INCREMENT ,
  `location_id`      INTEGER NOT NULL ,
  `user_id`          INTEGER NOT NULL ,
  `start_time`       DATETIME NOT NULL ,
@@ -111,7 +111,7 @@ CONSTRAINT `FK_142` FOREIGN KEY `fkIdx_142` (`severity_type_id`) REFERENCES `sev
 
 CREATE TABLE `remedy_taken`
 (
- `remedy_taken_id` INTEGER NOT NULL ,
+ `remedy_taken_id` INT NOT NULL AUTO_INCREMENT ,
  `migraine_id`     INTEGER NOT NULL ,
  `user_id`         INTEGER NOT NULL ,
  `remedy_id`       INTEGER NOT NULL ,
