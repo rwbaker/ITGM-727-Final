@@ -1,6 +1,9 @@
 <?php
 
 // CREATE USER
+// @TODO: Check for existing user
+// @TODO: Salt password
+// @TODO: Session support
 
 //Friendly reusable error
 function fail($err = "") {
@@ -22,6 +25,9 @@ function createUser($firstname, $lastname, $email, $password) {
   /* execute prepared statement */
   mysqli_stmt_execute($stmt);
   printf("%d Row inserted.\n", mysqli_stmt_affected_rows($stmt));
+
+  // Redirect to login page
+  // header("location: login.php");
 
   // Close statement
   mysqli_stmt_close($stmt);
