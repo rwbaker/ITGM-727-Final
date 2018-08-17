@@ -5,7 +5,7 @@
  *
  */
 
-  $button_link = '#';
+  $button_link = 'add.php';
   $button_text = 'Add Migraine';
 
 ?>
