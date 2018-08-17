@@ -5,7 +5,7 @@
  *
  */
 
-  $button_link = '#';
+  $button_link = 'login.php';
   $button_text = 'Log in';
 
 ?>
