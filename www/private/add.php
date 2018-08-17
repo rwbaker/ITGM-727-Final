@@ -23,7 +23,7 @@
  */
 
   //Importing helper functions to keep this page clean...
-
+  include "../includes/functions/datetime.php";
 
   // Check if the user is already logged in, if yes then redirect him to welcome page
   if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
@@ -63,11 +63,8 @@
       // mysqli_close($link);
 
 
-  // Function to get Severities from DB
+  // Function to get Remedy from DB
   // ----------------------------------------------------------------------------
-      // Include config file
-      // require_once "../includes/helpers/config.php";
-
       // Prepare a select statement
       $sql = "SELECT * FROM `remedy_types`";
       if ($stmt = mysqli_prepare($link, $sql)) {
@@ -85,9 +82,6 @@
       }
       /* close connection */
       // mysqli_close($link);
-
-
-
 
   // Function to get Locations from DB
   // ----------------------------------------------------------------------------
@@ -164,7 +158,7 @@
 
                 <div class="form-group">
                   <label for="">Start time</label>
-                  <input type="time" class="form-control" name="form-text-fname" required>
+                  <input type="time" class="form-control" name="form-text-fname" required value="<?php echo returnDateTimestamp(); ?>">
                 </div>
               </div>
               <div class="col">
@@ -200,6 +194,17 @@
             </div>
 
             <div class="form-group">
+              <label for="">Current Weather</label>
+              <select id="inputWeather" class="form-control">
+                <option label=" "></option>
+                <option value="Sunny">Sunny</option>
+                <option value="Cloudy">Cloudy</option>
+                <option value="Foggy">Foggy</option>
+                <option value="Rainy">Rainy</option>
+              </select>
+            </div>
+
+            <div class="form-group">
               <label for="">Remedy</label>
               <select id="inputLocation" class="form-control">
                 <option label=" "></option>
@@ -210,16 +215,6 @@
                 ?>
               </select>
             </div>
-
-            <!-- <div class="form-group">
-              <label for="">Current Weather</label>
-              <select id="inputWeather" class="form-control">
-                <option>Sunny</option>
-                <option>Cloudy</option>
-                <option>Foggy</option>
-                <option>Rainy</option>
-              </select>
-            </div> -->
 
             <div class="form-group">
               <label for="">Notes</label>
