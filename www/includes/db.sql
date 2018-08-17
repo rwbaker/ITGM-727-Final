@@ -50,7 +50,7 @@ CREATE TABLE `user`
  `first_name`    VARCHAR(256) NOT NULL ,
  `last_name`     VARCHAR(256) NOT NULL ,
  `email`         VARCHAR(256) NOT NULL ,
-`password`       VARCHAR(256) NOT NULL ,
+ `password`      VARCHAR(256) NOT NULL ,
  `password_salt` VARCHAR(256) NOT NULL ,
  `password_hash` VARCHAR(256) NOT NULL ,
  `created_at`    DATETIME DEFAULT CURRENT_TIMESTAMP,
