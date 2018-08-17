@@ -25,6 +25,95 @@
   //Importing helper functions to keep this page clean...
 
 
+  // Check if the user is already logged in, if yes then redirect him to welcome page
+  if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
+      header("location: private/index.php");
+      exit;
+  }
+
+  // Create Vars
+  $severity = array();
+  $locations = array();
+  $remedies = array();
+
+  // Include config file
+  // require_once "../includes/helpers/config.php";
+
+  // Function to get Severities from DB
+  // ----------------------------------------------------------------------------
+      // Include config file
+      require_once "../includes/helpers/config.php";
+
+      // Prepare a select statement
+      $sql = "SELECT * FROM `severity_id`";
+      if ($stmt = mysqli_prepare($link, $sql)) {
+          /* execute statement */
+          mysqli_stmt_execute($stmt);
+          /* bind result variables */
+          mysqli_stmt_bind_result($stmt, $id, $sev);
+          /* fetch values */
+          while (mysqli_stmt_fetch($stmt)) {
+              // printf("%s (%s)\n", $id, $sev);
+              $severity[$id] = $sev;
+          }
+          /* close statement */
+          mysqli_stmt_close($stmt);
+      }
+      /* close connection */
+      // mysqli_close($link);
+
+
+  // Function to get Severities from DB
+  // ----------------------------------------------------------------------------
+      // Include config file
+      // require_once "../includes/helpers/config.php";
+
+      // Prepare a select statement
+      $sql = "SELECT * FROM `remedy_types`";
+      if ($stmt = mysqli_prepare($link, $sql)) {
+          /* execute statement */
+          mysqli_stmt_execute($stmt);
+          /* bind result variables */
+          mysqli_stmt_bind_result($stmt, $id, $rem);
+          /* fetch values */
+          while (mysqli_stmt_fetch($stmt)) {
+              // printf("%s (%s)\n", $id, $rem);
+              $remedies[$id] = $rem;
+          }
+          /* close statement */
+          mysqli_stmt_close($stmt);
+      }
+      /* close connection */
+      // mysqli_close($link);
+
+
+
+
+  // Function to get Locations from DB
+  // ----------------------------------------------------------------------------
+      // Include config file
+      // require_once "../includes/helpers/config.php";
+
+      // Prepare a select statement
+      $sql = "SELECT * FROM `migraine_location`";
+      if ($stmt = mysqli_prepare($link, $sql)) {
+          /* execute statement */
+          mysqli_stmt_execute($stmt);
+          /* bind result variables */
+          mysqli_stmt_bind_result($stmt, $id, $loc);
+          /* fetch values */
+          while (mysqli_stmt_fetch($stmt)) {
+              // printf("%s (%s)\n", $id, $loc);
+              $locations[$id] = $loc;
+          }
+          /* close statement */
+          mysqli_stmt_close($stmt);
+      }
+      /* close connection */
+      mysqli_close($link);
+
+
+
 ?>
 
   <!DOCTYPE html>
@@ -89,26 +178,36 @@
             <div class="form-group">
               <label for="">Severity</label>
               <select id="inputSeverity" class="form-control">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-                <option>6</option>
-                <option>7</option>
-                <option>8</option>
-                <option>9</option>
-                <option>10</option>
+                <option label=" "></option>
+                <?php
+                  foreach ($severity as $key => $value):
+                    echo '<option value="'.$key.'">'.$value.'</option>';
+                  endforeach;
+                ?>
               </select>
             </div>
 
             <div class="form-group">
               <label for="">Location</label>
               <select id="inputLocation" class="form-control">
-                <option>Front</option>
-                <option>Back</option>
-                <option>Right</option>
-                <option>Left</option>
+                <option label=" "></option>
+                <?php
+                  foreach ($locations as $key => $value):
+                    echo '<option value="'.$key.'">'.$value.'</option>';
+                  endforeach;
+                ?>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="">Remedy</label>
+              <select id="inputLocation" class="form-control">
+                <option label=" "></option>
+                <?php
+                  foreach ($remedies as $key => $value):
+                    echo '<option value="'.$key.'">'.$value.'</option>';
+                  endforeach;
+                ?>
               </select>
             </div>
 
