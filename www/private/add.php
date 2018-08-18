@@ -24,11 +24,18 @@
 
   //Importing helper functions to keep this page clean...
   include "../includes/functions/datetime.php";
+  include "../includes/functions/createmigraine.php";
 
-  // Check if the user is already logged in, if yes then redirect him to welcome page
-  if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
-      header("location: private/index.php");
+
+  // Initialize the session
+  session_start();
+
+  // Check if user is logged in, if not then redirect
+  if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+      header("location: login.php");
       exit;
+  } else {
+      print_r($_SESSION);
   }
 
 
@@ -106,6 +113,41 @@
   //     mysqli_close($link);
 
 
+  // Processing form data when form is submitted
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+      // Create variables
+      $data_start = $data_end = $data_severity = $data_location = "";
+      $data_weather = $data_remedy = $data_notes = "";
+
+      if (!empty(trim($_POST["form-time-start"]))) {
+          $data_start = $_POST["form-time-start"];
+      }
+      if (!empty(trim($_POST["form-time-end"]))) {
+          $data_end = $_POST["form-time-end"];
+      }
+      if (!empty(trim($_POST["form-select-severity"]))) {
+          $data_severity = $_POST["form-select-severity"];
+      }
+      if (!empty(trim($_POST["form-select-location"]))) {
+          $data_location = $_POST["form-select-location"];
+      }
+      if (!empty(trim($_POST["form-select-weather"]))) {
+          $data_weather = $_POST["form-select-weather"];
+      }
+      if (!empty(trim($_POST["form-select-remedy"]))) {
+          $data_remedy = $_POST["form-select-remedy"];
+      }
+      if (!empty(trim($_POST["form-textarea-notes"]))) {
+          $data_notes = $_POST["form-textarea-notes"];
+      }
+
+
+      if (!empty($_SESSION["id"])) {
+          createMigraine($_SESSION["id"], $data_start, $data_end, $data_severity, $data_location, $data_weather, $data_remedy, $data_notes);
+      }
+  }
+
 
 ?>
 
@@ -150,27 +192,27 @@
           <h1 class="h3 mb-3">Add Migraine</h1>
 
           <!-- SIGNUP FORM -->
-          <form action="index.php" method="post" enctype="multipart/form-data">
+          <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
 
             <div class="row mb-0">
               <div class="col">
 
                 <div class="form-group">
                   <label for="">Start time</label>
-                  <input type="time" class="form-control" name="form-text-fname" required value="<?php echo returnDateTimestamp(); ?>">
+                  <input type="time" class="form-control" name="form-time-start" required value="<?php echo returnDateTimestamp(); ?>">
                 </div>
               </div>
               <div class="col">
                 <div class="form-group">
                   <label for="">End time</label>
-                  <input type="time" class="form-control" name="form-text-lname" placeholder="">
+                  <input type="time" class="form-control" name="form-time-end" placeholder="">
                 </div>
               </div>
             </div>
 
             <div class="form-group">
               <label for="">Severity</label>
-              <select id="inputSeverity" class="form-control">
+              <select id="inputSeverity" name="form-select-severity" class="form-control">
                 <option label=" "></option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -192,7 +234,7 @@
 
             <div class="form-group">
               <label for="">Location</label>
-              <select id="inputLocation" class="form-control">
+              <select id="inputLocation" name="form-select-location" class="form-control">
                 <option label=" "></option>
                 <option value="Front">Front</option>
                 <option value="Back">Back</option>
@@ -208,7 +250,7 @@
 
             <div class="form-group">
               <label for="">Current Weather</label>
-              <select id="inputWeather" class="form-control">
+              <select id="inputWeather" name="form-select-weather" class="form-control">
                 <option label=" "></option>
                 <option value="Sunny">Sunny</option>
                 <option value="Cloudy">Cloudy</option>
@@ -219,7 +261,7 @@
 
             <div class="form-group">
               <label for="">Remedy</label>
-              <select id="inputLocation" class="form-control">
+              <select id="inputLocation" name="form-select-remedy" class="form-control">
                 <option label=" "></option>
                 <option value="Imitrex">Imitrex</option>
                 <option value="Ibuprofen">Ibuprofen</option>
@@ -233,10 +275,10 @@
 
             <div class="form-group">
               <label for="">Notes</label>
-              <textarea class="form-control" id="textareaNotes" rows="3"></textarea>
+              <textarea class="form-control" id="textareaNotes" name="form-textarea-notes" rows="3"></textarea>
             </div>
 
-            <button type="submit" name="submit" class="btn btn-primary btn-lg mt-2">Sign up</button>
+            <button type="submit" name="submit" class="btn btn-primary btn-lg mt-2">Save</button>
           </form>
 
         </div> <!-- END OF .col-7 -->
