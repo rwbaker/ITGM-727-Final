@@ -51,16 +51,42 @@
   // Standard & reusable db connection
    include "../includes/helpers/config.php";
      // Prepare a select statement
-     $sql = "SELECT `user_id`, `first_name`, `last_name`, `email`, `password`, `password_salt`, `password_hash`, `created_at`, `user_type` FROM `user` WHERE user_id = '$viewUser'";
+     $sql = "SELECT `user_id`, `first_name`, `last_name`, `email`, `created_at`, `user_type` FROM `user` WHERE user_id = '$viewUser'";
 
      if ($result = mysqli_query($link, $sql)) {
          /* fetch associative array */
          $userDetails = mysqli_fetch_assoc($result);
      }
+     // print_r($userDetails);
      /* close connection */
      mysqli_close($link);
 
-  // GET ALL MIGRAINES FOR SELECTED USER
+
+
+
+     // Get Migraines from DB
+     // ----------------------------------------------------------------------------
+       // Standard & reusable db connection
+       include "../includes/helpers/config.php";
+
+         // Prepare a select statement
+         $sql = "SELECT `migraine_id`, `severity`, `location`, `duration`, `start_time` FROM `migraine` WHERE `user_id` = '$viewUser'";
+
+         if ($result = mysqli_query($link, $sql)) {
+             /* fetch associative array */
+             while ($row = mysqli_fetch_assoc($result)) {
+                 $userMigraines[] = $row;
+             }
+             /* free result set */
+             mysqli_free_result($result);
+         }
+
+        // print_r($userMigraines);
+
+         /* close connection */
+         mysqli_close($link);
+
+
 
 ?>
 
@@ -107,14 +133,15 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>2018-01</td>
-                <td>Front</td>
-                <td>10</td>
-                <td>4 hours</td>
-                <td>Monday, March 1, 2018</td>
-              </tr>
-              <tr>
+              <?php
+                foreach ($userMigraines as $data) {
+                    echo "<tr data-href='details.php?migraine=" . $data["migraine_id"] . "'>";
+                    foreach ($data as $field => $value) {
+                        echo "<td><a href='details.php?migraine=" . $data["migraine_id"] . "'>" . $value . "</a></td>";
+                    }
+                    echo "</tr>";
+                }
+              ?>
             </tbody>
           </table>
 
