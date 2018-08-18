@@ -110,6 +110,27 @@
     <!-- APP NAV BAR -->
     <?php include '../includes/header-admin.php'; ?>
 
+    <div class="container mt-1 px-0">
+      <div class="row">
+        <div class="col">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-white">
+              <li class="breadcrumb-item"><a href="index.php">
+                Users
+              </a></li>
+              <li class="breadcrumb-item active" aria-current="page">
+                <?php
+                  if ($userDetails["first_name"]) {
+                      echo $userDetails["first_name"] . "'s Migraines";
+                  }
+                ?>
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+
     <div class="container mb-5 mt-3">
 
       <div class="row">
