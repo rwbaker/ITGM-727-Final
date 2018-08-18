@@ -24,7 +24,6 @@
 
   //Importing helper functions to keep this page clean...
   include "../includes/functions/datetime.php";
-  include "../includes/functions/createmigraine.php";
 
 
   // Initialize the session
@@ -113,40 +112,7 @@
   //     mysqli_close($link);
 
 
-  // Processing form data when form is submitted
-  if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-      // Create variables
-      $data_start = $data_end = $data_severity = $data_location = "";
-      $data_weather = $data_remedy = $data_notes = "";
-
-      if (!empty(trim($_POST["form-time-start"]))) {
-          $data_start = $_POST["form-time-start"];
-      }
-      if (!empty(trim($_POST["form-time-end"]))) {
-          $data_end = $_POST["form-time-end"];
-      }
-      if (!empty(trim($_POST["form-select-severity"]))) {
-          $data_severity = $_POST["form-select-severity"];
-      }
-      if (!empty(trim($_POST["form-select-location"]))) {
-          $data_location = $_POST["form-select-location"];
-      }
-      if (!empty(trim($_POST["form-select-weather"]))) {
-          $data_weather = $_POST["form-select-weather"];
-      }
-      if (!empty(trim($_POST["form-select-remedy"]))) {
-          $data_remedy = $_POST["form-select-remedy"];
-      }
-      if (!empty(trim($_POST["form-textarea-notes"]))) {
-          $data_notes = $_POST["form-textarea-notes"];
-      }
-
-
-      if (!empty($_SESSION["id"])) {
-          createMigraine($_SESSION["id"], $data_start, $data_end, $data_severity, $data_location, $data_weather, $data_remedy, $data_notes);
-      }
-  }
 
 
 ?>
@@ -192,7 +158,7 @@
           <h1 class="h3 mb-3">Add Migraine</h1>
 
           <!-- SIGNUP FORM -->
-          <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
+          <form action="index.php" method="post" enctype="multipart/form-data">
 
             <div class="row mb-0">
               <div class="col">
