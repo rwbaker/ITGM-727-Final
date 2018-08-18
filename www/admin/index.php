@@ -98,7 +98,7 @@
     include "../includes/helpers/config.php";
 
       // Prepare a select statement
-      $sql = "SELECT `user_id`, `first_name`, `last_name`, `email`, `created_at` FROM `user` WHERE `user_type` IS NULL";
+      $sql = "SELECT `user_id`, `first_name`, `last_name`, `email`, `created_at`, `user_type` FROM `user`";
 
       if ($result = mysqli_query($link, $sql)) {
           /* fetch associative array */
@@ -149,6 +149,7 @@
                 <th scope="col">Last Name</th>
                 <th scope="col">Email</th>
                 <th scope="col">Created</th>
+                <th scope="col">User Type</th>
               </tr>
             </thead>
             <tbody>
@@ -156,7 +157,11 @@
                 foreach ($allUsers as $data) {
                     echo "<tr data-href='migraines.php?user=" . $data["user_id"] . "'>";
                     foreach ($data as $field => $value) {
-                        echo "<td><a href='migraines.php?user=" . $data["user_id"] . "'>" . $value . "</a></td>";
+                        if ($data["user_type"] == "admin") {
+                            echo "<td>" . $value . "</td>";
+                        } else {
+                            echo "<td><a href='migraines.php?user=" . $data["user_id"] . "'>" . $value . "</a></td>";
+                        }
                     }
                     echo "</tr>";
                 }

@@ -31,53 +31,51 @@
   // Define variables and initialize with empty values
   $firstname =     $lastname =     $email =     $password = "";
   $firstname_err =  $lastname_err = $email_err = $password_err = "";
+  $user_type = null;
 
   // Processing form data when form is submitted
-  if($_SERVER["REQUEST_METHOD"] == "POST"){
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
       // Validate email
-      if(empty(trim($_POST["form-text-email"]))){
+      if (empty(trim($_POST["form-text-email"]))) {
           $email_err = "Please enter an email address.";
-      } else{
+      } else {
           // Store in var
           $email = $_POST["form-text-email"];
       }
 
       // Validate first name
-      if(empty(trim($_POST["form-text-fname"]))){
+      if (empty(trim($_POST["form-text-fname"]))) {
           $firstname_err = "Please enter a first name.";
-      } else{
+      } else {
           // Store in var
           $firstname = $_POST["form-text-fname"];
       }
 
       // Validate last name
-      if(empty(trim($_POST["form-text-lname"]))){
+      if (empty(trim($_POST["form-text-lname"]))) {
           $lastname_err = "Please enter a last name.";
-      } else{
+      } else {
           // Store in var
           $lastname = $_POST["form-text-lname"];
       }
 
       // Validate password
-      if(empty(trim($_POST["form-text-password"]))){
+      if (empty(trim($_POST["form-text-password"]))) {
           $password_err = "Please enter a password.";
-      } elseif(strlen(trim($_POST["form-text-password"])) < 6){
+      } elseif (strlen(trim($_POST["form-text-password"])) < 6) {
           $password_err = "Password must have at least 6 characters.";
-      } else{
+      } else {
           $password = trim($_POST["form-text-password"]);
       }
 
       // Check input errors before inserting in database
-      if(empty($email_err) && empty($password_err)){
-
-        createUser($firstname, $lastname, $email, $password);
-
+      if (empty($email_err) && empty($password_err)) {
+          createUser($firstname, $lastname, $email, $password, $user_type);
       }
 
       // Close connection
       // mysqli_close($link);
-
   }
 
 ?>

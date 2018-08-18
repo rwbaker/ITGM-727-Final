@@ -4,11 +4,14 @@
 
   $is_admin = false;
 
-  if (isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] == true) {
-      if ($_SESSION["user_type"] == "admin") {
-          $is_admin = true;
+  if (isset($_SESSION)) {
+      if (isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] == true) {
+          if ($_SESSION["user_type"] == "admin") {
+              $is_admin = true;
+          }
       }
   }
+
 
 ?>
 
