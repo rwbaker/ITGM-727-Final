@@ -76,8 +76,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 $myMigraines = array();
 // Get Migraines from DB
 // ----------------------------------------------------------------------------
-    // Include config file
-    require_once "../includes/helpers/config.php";
+  // Standard & reusable db connection
+  include "../includes/helpers/config.php";
 
     // Prepare a select statement
     $sql = "SELECT `migraine_id`, `severity`, `location`, `duration`, `start_time` FROM `migraine` WHERE `user_id` = " . $_SESSION["id"];

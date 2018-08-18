@@ -16,7 +16,7 @@ function createMigraine($user_id, $data_start, $data_end, $data_severity, $data_
     $data_duration = "";
 
     // Standard & reusable db connection
-    require_once "../includes/helpers/config.php";
+    include "../includes/helpers/config.php";
 
     $sql = "INSERT INTO migraine (user_id, start_time, end_time, severity, location, weather, remedy, notes, duration) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
