@@ -34,7 +34,7 @@
       header("location: login.php");
       exit;
   } else {
-      print_r($_SESSION);
+      // print_r($_SESSION);
   }
 
 
