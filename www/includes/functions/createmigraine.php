@@ -28,7 +28,8 @@ function createMigraine($user_id, $data_start, $data_end, $data_severity, $data_
 
     /* execute prepared statement */
     mysqli_stmt_execute($stmt);
-    printf("%d Row inserted.\n", mysqli_stmt_affected_rows($stmt));
+    // printf("%d Row inserted.\n", mysqli_stmt_affected_rows($stmt));
+    // @TODO Success Message
 
     // Close statement
     mysqli_stmt_close($stmt);
