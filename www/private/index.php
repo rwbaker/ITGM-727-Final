@@ -33,10 +33,11 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     header("location: login.php");
     exit;
 } else {
-    print_r($_SESSION);
+    // print_r($_SESSION);
 }
 
 // Processing form data when form is submitted
+// Handles NEW MIGRAINE
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Create variables
@@ -65,11 +66,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $data_notes = $_POST["form-textarea-notes"];
     }
 
-
     if (!empty($_SESSION["id"])) {
         createMigraine($_SESSION["id"], $data_start, $data_end, $data_severity, $data_location, $data_weather, $data_remedy, $data_notes);
     }
 }
+
+
+
+$myMigraines = array();
+// Get Migraines from DB
+// ----------------------------------------------------------------------------
+    // Include config file
+    require_once "../includes/helpers/config.php";
+
+    // Prepare a select statement
+    $sql = "SELECT `migraine_id`, `severity`, `location`, `duration`, `start_time` FROM `migraine` WHERE `user_id` = " . $_SESSION["id"];
+
+    if ($result = mysqli_query($link, $sql)) {
+        /* fetch associative array */
+        while ($row = mysqli_fetch_assoc($result)) {
+            $myMigraines[] = $row;
+        }
+        /* free result set */
+        mysqli_free_result($result);
+    }
+
+    /* close connection */
+    mysqli_close($link);
 
 ?>
 
@@ -103,21 +126,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <thead>
               <tr>
                 <th scope="col">Migraine</th>
-                <th scope="col">Location</th>
                 <th scope="col">Severity</th>
+                <th scope="col">Location</th>
                 <th scope="col">Duration</th>
-                <th scope="col">Date Logged</th>
+                <th scope="col">Date Started</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>2018-01</td>
-                <td>Front</td>
-                <td>10</td>
-                <td>4 hours</td>
-                <td>Monday, March 1, 2018</td>
-              </tr>
-              <tr>
+            <?php
+              foreach ($myMigraines as $data) {
+                  echo "<tr>";
+                  foreach ($data as $field) {
+                      echo "<td>" . $field . "</td>";
+                  }
+                  echo "</tr>";
+              }
+            ?>
             </tbody>
           </table>
 

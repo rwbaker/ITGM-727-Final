@@ -33,3 +33,6 @@ hr.brain {
 .text-muted {
   color:#9B9B9B !important;
 }
+
+
+table th {text-align: left !important;}
