@@ -40,8 +40,44 @@
       if (empty(trim($_POST["form-text-email"]))) {
           $email_err = "Please enter an email address.";
       } else {
-          // Store in var
-          $email = $_POST["form-text-email"];
+
+          // CHECK FOR DUPLICATE EMAIL
+
+          // // DB connection
+          // // using Config2 because for some reason I can't have two $links on the same page
+          // require_once "includes/helpers/config.php";
+          //
+          // // Prepare a select statement
+          // $sql = "SELECT `user_id` FROM `user` WHERE `email` = ?";
+          //
+          // if ($stmt = mysqli_prepare($link, $sql)) {
+          //     // Bind variables to the prepared statement as parameters
+          //     mysqli_stmt_bind_param($stmt, "s", $param_email);
+          //
+          //     // Set parameters
+          //     $param_email = trim($_POST["form-text-email"]);
+          //
+          //     // Attempt to execute the prepared statement
+          //     if (mysqli_stmt_execute($stmt)) {
+          //         /* store result */
+          //         mysqli_stmt_store_result($stmt);
+          //
+          //         if (mysqli_stmt_num_rows($stmt) == 1) {
+          //             $email_err = "A user with this email already exists.";
+          //         }
+          //         $email = trim($_POST["form-text-email"]);
+          //     } else {
+          //         echo "Oops! Something went wrong. Please try again later.";
+          //     }
+          // }
+          //
+          // // Close statement
+          // mysqli_stmt_close($stmt);
+          //
+          // // Close connection
+          // mysqli_close($link);
+
+          $email = trim($_POST["form-text-email"]);
       }
 
       // Validate first name
@@ -73,9 +109,6 @@
       if (empty($email_err) && empty($password_err)) {
           createUser($firstname, $lastname, $email, $password, $user_type);
       }
-
-      // Close connection
-      // mysqli_close($link);
   }
 
 ?>

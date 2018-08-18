@@ -38,7 +38,7 @@ function createUser($firstname, $lastname, $email, $password, $user_type)
     // printf("%d Row inserted.\n", mysqli_stmt_affected_rows($stmt));
 
     // Redirect to login page
-    // header("location: login.php");
+    header("location: login.php");
 
     // Close statement
     mysqli_stmt_close($stmt);

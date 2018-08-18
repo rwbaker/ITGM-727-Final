@@ -1,4 +1,5 @@
 <?php
+
   /* Database credentials. */
   $DB_SERVER= "localhost";
   $DB_USERNAME = "root";

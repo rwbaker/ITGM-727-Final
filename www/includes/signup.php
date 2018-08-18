@@ -17,31 +17,31 @@
 
             <div class="row">
               <div class="col">
-                <div class="form-group <?php echo (!empty($firstname_err)) ? 'has-error' : ''; ?>">
+                <div class="form-group">
                   <label for="">First name</label>
-                  <input type="text" class="form-control" name="form-text-fname" placeholder="" required value="<?php echo $firstname; ?>">
-                  <span class="help-block"><?php echo $firstname_err; ?></span>
+                  <input type="text" class="form-control <?php echo (!empty($firstname_err)) ? 'is-invalid' : ''; ?>" name="form-text-fname" placeholder="" required value="<?php echo $firstname; ?>">
+                  <div class="invalid-feedback"><?php echo $firstname_err; ?></div>
                 </div>
               </div>
               <div class="col">
-                <div class="form-group <?php echo (!empty($lastname_err)) ? 'has-error' : ''; ?>">
+                <div class="form-group">
                   <label for="">Last name</label>
-                  <input type="text" class="form-control" name="form-text-lname" placeholder="" required value="<?php echo $lastname; ?>">
-                  <span class="help-block"><?php echo $lastname_err; ?></span>
+                  <input type="text" class="form-control <?php echo (!empty($lastname_err)) ? 'is-invalid' : ''; ?>" name="form-text-lname" placeholder="" required value="<?php echo $lastname; ?>">
+                  <div class="invalid-feedback"><?php echo $lastname_err; ?></div>
                 </div>
               </div>
             </div>
 
-            <div class="form-group <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
+            <div class="form-group">
               <label for="">Email address</label>
-              <input type="email" class="form-control" name="form-text-email" required placeholder="" value="<?php echo $email; ?>">
-              <span class="help-block"><?php echo $email_err; ?></span>
+              <input type="email" class="form-control <?php echo (!empty($email_err)) ? 'is-invalid' : ''; ?>" name="form-text-email" required placeholder="" value="<?php echo $email; ?>">
+              <div class="invalid-feedback"><?php echo $email_err; ?></span>
             </div>
 
-            <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
+            <div class="form-group">
               <label for="">Password</label>
-              <input type="password" class="form-control" name="form-text-password" required placeholder="" value="<?php echo $password; ?>">
-              <span class="help-block"><?php echo $password_err; ?></span>
+              <input type="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" name="form-text-password" required placeholder="" value="<?php echo $password; ?>">
+              <div class="invalid-feedback"><?php echo $password_err; ?></div>
             </div>
 
             <?php
