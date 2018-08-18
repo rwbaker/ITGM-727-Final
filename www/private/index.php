@@ -135,9 +135,9 @@ $myMigraines = array();
             <tbody>
             <?php
               foreach ($myMigraines as $data) {
-                  echo "<tr>";
-                  foreach ($data as $field) {
-                      echo "<td>" . $field . "</td>";
+                  echo "<tr data-href='details.php?migraine=" . $data["migraine_id"] . "'>";
+                  foreach ($data as $field => $value) {
+                      echo "<td><a href='details.php?migraine=" . $data["migraine_id"] . "'>" . $value . "</a></td>";
                   }
                   echo "</tr>";
               }
