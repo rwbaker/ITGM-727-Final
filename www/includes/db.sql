@@ -46,14 +46,15 @@ PRIMARY KEY (`location_id`)
 
 CREATE TABLE `user`
 (
- `user_id`       INT NOT NULL AUTO_INCREMENT ,
- `first_name`    VARCHAR(256) NOT NULL ,
- `last_name`     VARCHAR(256) NOT NULL ,
- `email`         VARCHAR(256) NOT NULL ,
- `password`      VARCHAR(256) NOT NULL ,
- `password_salt` VARCHAR(256) NOT NULL ,
- `password_hash` VARCHAR(256) NOT NULL ,
- `created_at`    DATETIME DEFAULT CURRENT_TIMESTAMP,
+  `user_id`       int(11) NOT NULL,
+  `first_name`    varchar(256) NOT NULL,
+  `last_name`     varchar(256) NOT NULL,
+  `email`         varchar(256) NOT NULL,
+  `password`      varchar(256) NOT NULL,
+  `password_salt` varchar(256) NOT NULL,
+  `password_hash` varchar(256) NOT NULL,
+  `created_at`    datetime DEFAULT CURRENT_TIMESTAMP,
+  `user_type`     varchar(50) DEFAULT NULL,
 
 PRIMARY KEY (`user_id`)
 );
