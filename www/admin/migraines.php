@@ -135,9 +135,9 @@
             <tbody>
               <?php
                 foreach ($userMigraines as $data) {
-                    echo "<tr data-href='details.php?migraine=" . $data["migraine_id"] . "'>";
+                    echo "<tr data-href='details.php?user=$viewUser&migraine=" . $data["migraine_id"] . "'>";
                     foreach ($data as $field => $value) {
-                        echo "<td><a href='details.php?migraine=" . $data["migraine_id"] . "'>" . $value . "</a></td>";
+                        echo "<td><a href='details.php?user=$viewUser&migraine=" . $data["migraine_id"] . "'>" . $value . "</a></td>";
                     }
                     echo "</tr>";
                 }
