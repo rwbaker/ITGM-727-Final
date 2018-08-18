@@ -5,8 +5,17 @@
  *
  */
 
-  $button_link = '#';
-  $button_text = 'Add User';
+ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+     // header("location: login.php");
+     // exit;
+
+     $button_link = 'login.php';
+     $button_text = 'Login';
+ } else {
+     // print_r($_SESSION);
+     $button_link = 'adduser.php';
+     $button_text = 'Add User';
+ }
 
 ?>
 <div class='navbar-wrapper shadow-sm bg-white'>
@@ -20,9 +29,13 @@
       <!-- Nav bar links -->
       <div class='collapse navbar-collapse' id='navbarSupportedContent'>
         <ul class='navbar-nav mr-auto'>
-          <li class='nav-item active'>
-            <!-- <a class='nav-link' href='index.php'>Home <span class='sr-only'>(current)</span></a> -->
-          </li>
+          <?php
+
+            if (isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] == true) {
+                echo "<li class='nav-item'><a class='nav-link' href='../logout.php'>Logout</a></li>";
+            }
+
+          ?>
         </ul>
 
         <?php

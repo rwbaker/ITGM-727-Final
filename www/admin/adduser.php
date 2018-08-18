@@ -25,6 +25,22 @@
   //Importing helper functions to keep this page clean...
 
 
+  // Initialize the session
+  session_start();
+
+  // Check if user is logged in, if not then redirect
+  if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+      header("location: login.php");
+      exit;
+  } else {
+      // print_r($_SESSION);
+  }
+
+
+  // Define variables and initialize with empty values
+  $firstname =     $lastname =     $email =     $password = "";
+  $firstname_err =  $lastname_err = $email_err = $password_err = "";
+  
 ?>
 
   <!DOCTYPE html>
