@@ -24,6 +24,52 @@
 
   //Importing helper functions to keep this page clean...
 
+  // Initialize the session
+  session_start();
+
+  // Check if user is logged in, if not then redirect
+  if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+      header("location: login.php");
+      exit;
+  } else {
+      // print_r($_SESSION);
+  }
+
+  //Set some variables
+  $viewMigraine = $user_id = "";
+  $myMigraine = array();
+
+  // Set variables if they're there...
+  if (isset($_SESSION["id"]) && isset($_GET["migraine"])) {
+      // user from session
+      $user_id = $_SESSION["id"];
+
+      // desired migraine from query string
+      $viewMigraine = $_GET["migraine"];
+
+      // echo "<br />migraine #" . $viewMigraine;
+      // echo "<br />user id: " . $user_id;
+  }
+
+
+
+// Get SINGLE Migraine from DB
+// ----------------------------------------------------------------------------
+  // Standard & reusable db connection
+  include "../includes/helpers/config.php";
+
+    // Prepare a select statement
+    $sql = "SELECT `migraine_id`, `start_time`, `end_time`, `severity`, `location`, `weather`, `remedy`, `notes`, `duration` FROM `migraine` WHERE `migraine_id` = '$viewMigraine' and `user_id` = '$user_id'";
+
+    if ($result = mysqli_query($link, $sql)) {
+        /* fetch associative array */
+        $myMigraine = mysqli_fetch_assoc($result);
+    }
+
+    // print_r($myMigraine);
+
+    /* close connection */
+    mysqli_close($link);
 
 ?>
 
@@ -52,8 +98,15 @@
         <div class="col">
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-white">
-              <li class="breadcrumb-item"><a href="#">Your Migraines</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Migraine #0000-00</li>
+              <li class="breadcrumb-item"><a href="index.php">Your Migraines</a></li>
+              <li class="breadcrumb-item active" aria-current="page">
+                Migraine
+                <?php
+                if ($myMigraine["migraine_id"]) {
+                    echo ' # ' . $myMigraine["migraine_id"];
+                }
+                ?>
+              </li>
             </ol>
           </nav>
         </div>
@@ -67,43 +120,99 @@
       <div class="row">
         <div id="migraine-details" class="col">
 
-          <h1 class="h3 mb-3">Migraine #0000-00</h1>
+          <h1 class="h3 mb-3">
+            Migraine
+            <?php
+            if ($myMigraine["migraine_id"]) {
+                echo ' # ' . $myMigraine["migraine_id"];
+            }
+            ?>
+          </h1>
 
           <!-- DATA -->
           <div class="row border-top border-bottom py-3">
             <div class="col-2">Duration</div>
-            <div class="col-10">4 hours<br />
-              <span class="text-muted">10:00am - 2:00pm</span>
+            <div class="col-10">
+              <?php
+              if ($myMigraine["duration"]) {
+                  echo $myMigraine["duration"];
+              } else {
+                  echo "<i>unknown duration</i>";
+              }
+              ?>
+              <br />
+              <span class="text-muted">
+                <?php
+                if ($myMigraine["start_time"]) {
+                    echo $myMigraine["start_time"];
+                }
+                ?>
+                &ndash;
+                <?php
+                if ($myMigraine["end_time"]) {
+                    echo $myMigraine["end_time"];
+                } else {
+                    echo "<i>unknown end time</i>";
+                }
+                ?>
+              </span>
               <!-- <button type="button" class="btn btn-outline-primary btn-sm ml-3">Edit Migraine</button> -->
             </div>
           </div>
 
           <div class="row border-bottom py-3">
             <div class="col-2">Severity</div>
-            <div class="col-10">4 <span class="text-muted">out of</span> 10</div>
+            <div class="col-10">
+              <?php
+              if ($myMigraine["severity"]) {
+                  echo $myMigraine["severity"];
+              }
+              ?>
+              <span class="text-muted">out of</span> 10</div>
           </div>
 
           <div class="row border-bottom py-3">
             <div class="col-2">Location</div>
-            <div class="col-10">Front</div>
+            <div class="col-10">
+              <?php
+              if ($myMigraine["location"]) {
+                  echo $myMigraine["location"];
+              }
+              ?>
+            </div>
           </div>
 
           <div class="row border-bottom py-3">
             <div class="col-2">Current Weather</div>
-            <div class="col-10">Cloudy</div>
+            <div class="col-10">
+              <?php
+              if ($myMigraine["weather"]) {
+                  echo $myMigraine["weather"];
+              }
+              ?>
+            </div>
           </div>
 
           <div class="row border-bottom py-3">
             <div class="col-2">Remedy</div>
             <div class="col-10">
-              Ibuprofen <span class="text-muted">taken at</span> 4:00pm<br />
-              Imatrex <span class="text-muted">taken at</span> 6:00pm
+              <?php
+              if ($myMigraine["remedy"]) {
+                  echo $myMigraine["remedy"];
+              }
+              ?>
             </div>
           </div>
 
           <div class="row border-bottom py-3">
             <div class="col-2">Notes</div>
-            <div class="col-6">Class taciti bibendum porta nisl ad venenatis nunc senectus malesuada, ridiculus vel tincidunt euismod quam ultricies habitant penatibus ullamcorper curabitur, aptent finibus fringilla lacus elit leo platea blandit.</div>
+            <div class="col-6">
+              <?php
+              if ($myMigraine["notes"]) {
+                  echo $myMigraine["notes"];
+              }
+              ?>
+            </div>
           </div>
 
         <div class="row mt-4 mb-4">
