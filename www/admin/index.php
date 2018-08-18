@@ -23,7 +23,7 @@
  */
 
   //Importing helper functions to keep this page clean...
-
+  include '../includes/functions/createuser.php';
 
   // Initialize the session
   session_start();
@@ -35,6 +35,50 @@
   } else {
       // print_r($_SESSION);
   }
+
+
+  // Processing form data when form is submitted
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+      // Validate email
+      if (empty(trim($_POST["form-text-email"]))) {
+          $email_err = "Please enter an email address.";
+      } else {
+          // Store in var
+          $email = $_POST["form-text-email"];
+      }
+
+      // Validate first name
+      if (empty(trim($_POST["form-text-fname"]))) {
+          $firstname_err = "Please enter a first name.";
+      } else {
+          // Store in var
+          $firstname = $_POST["form-text-fname"];
+      }
+
+      // Validate last name
+      if (empty(trim($_POST["form-text-lname"]))) {
+          $lastname_err = "Please enter a last name.";
+      } else {
+          // Store in var
+          $lastname = $_POST["form-text-lname"];
+      }
+
+      // Validate password
+      if (empty(trim($_POST["form-text-password"]))) {
+          $password_err = "Please enter a password.";
+      } elseif (strlen(trim($_POST["form-text-password"])) < 6) {
+          $password_err = "Password must have at least 6 characters.";
+      } else {
+          $password = trim($_POST["form-text-password"]);
+      }
+
+      // Check input errors before inserting in database
+      if (empty($email_err) && empty($password_err)) {
+          createUser($firstname, $lastname, $email, $password);
+      }
+  }
+
 
 
   $allUsers = array();
