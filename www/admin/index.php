@@ -25,6 +25,40 @@
   //Importing helper functions to keep this page clean...
 
 
+  // Initialize the session
+  session_start();
+
+  // Check if user is logged in, if not then redirect
+  if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+      header("location: login.php");
+      exit;
+  } else {
+      // print_r($_SESSION);
+  }
+
+
+  $allUsers = array();
+  // Get all users from DB
+  // ----------------------------------------------------------------------------
+    // Standard & reusable db connection
+    include "../includes/helpers/config.php";
+
+      // Prepare a select statement
+      $sql = "SELECT `user_id`, `first_name`, `last_name`, `email`, `created_at` FROM `user` WHERE `user_type` IS NULL";
+
+      if ($result = mysqli_query($link, $sql)) {
+          /* fetch associative array */
+          while ($row = mysqli_fetch_assoc($result)) {
+              $allUsers[] = $row;
+          }
+          /* free result set */
+          mysqli_free_result($result);
+      }
+
+      /* close connection */
+      mysqli_close($link);
+
+
 ?>
 
   <!DOCTYPE html>
@@ -56,16 +90,23 @@
           <table class="table table-hover">
             <thead>
               <tr>
-                <th scope="col">Name</th>
+                <th scope="col">User #</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
                 <th scope="col">Email</th>
+                <th scope="col">Created</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Mark Otto</td>
-                <td>mark@otto.com</td>
-              </tr>
-              <tr>
+              <?php
+                foreach ($allUsers as $data) {
+                    echo "<tr>";
+                    foreach ($data as $field) {
+                        echo "<td>" . $field . "</td>";
+                    }
+                    echo "</tr>";
+                }
+              ?>
             </tbody>
           </table>
 
