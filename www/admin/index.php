@@ -73,9 +73,19 @@
           $password = trim($_POST["form-text-password"]);
       }
 
+      // Validate USER TYPE
+      if (empty(trim($_POST["form-select-usertype"]))) {
+          $user_type = null;
+      } else {
+          // Store in var
+          $user_type = $_POST["form-select-usertype"];
+      }
+
+      // echo "user type: " . $user_type;
+
       // Check input errors before inserting in database
       if (empty($email_err) && empty($password_err)) {
-          createUser($firstname, $lastname, $email, $password);
+          createUser($firstname, $lastname, $email, $password, $user_type);
       }
   }
 

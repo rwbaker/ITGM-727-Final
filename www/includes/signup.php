@@ -1,3 +1,16 @@
+<?php
+
+  // session_start();
+
+  $is_admin = false;
+
+  if (isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] == true) {
+      if ($_SESSION["user_type"] == "admin") {
+          $is_admin = true;
+      }
+  }
+
+?>
 
             <div class="row">
               <div class="col">
@@ -27,5 +40,19 @@
               <input type="password" class="form-control" name="form-text-password" required placeholder="" value="<?php echo $password; ?>">
               <span class="help-block"><?php echo $password_err; ?></span>
             </div>
+
+            <?php
+            if ($is_admin == true) {
+                echo '
+              <div class="form-group">
+                <label for="">Make Admin User?</label>
+                <select id="inputUserType" name="form-select-usertype" class="form-control">
+                  <option value="">No</option>
+                  <option value="admin">Yes</option>
+                </select>
+              </div>
+              ';
+            }
+            ?>
 
             <button type="submit" name="submit" class="btn btn-primary btn-lg mt-2">Submit</button>

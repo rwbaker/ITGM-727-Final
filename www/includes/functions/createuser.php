@@ -12,7 +12,7 @@ function fail($err = "")
     echo "Something went wrong. Please try again later. " . $err;
 }
 
-function createUser($firstname, $lastname, $email, $password)
+function createUser($firstname, $lastname, $email, $password, $user_type)
 {
 
     // Standard & reusable db connection
@@ -25,10 +25,10 @@ function createUser($firstname, $lastname, $email, $password)
     }
 
     // Prepare an insert statement
-    $stmt = mysqli_prepare($link, "INSERT INTO user (first_name, last_name, email, password_hash) VALUES (?, ?, ?, ?)");
+    $stmt = mysqli_prepare($link, "INSERT INTO user (first_name, last_name, email, password_hash, user_type) VALUES (?, ?, ?, ?, ?)");
 
     // Bind variables to the prepared statement as parameters
-    mysqli_stmt_bind_param($stmt, "ssss", $firstname, $lastname, $email, $param_password);
+    mysqli_stmt_bind_param($stmt, "sssss", $firstname, $lastname, $email, $param_password, $user_type);
 
     // Set parameters
   $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
