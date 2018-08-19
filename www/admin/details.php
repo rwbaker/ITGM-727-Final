@@ -89,7 +89,7 @@
           $data_remedy = $_POST["form-select-remedy"];
       }
       if (!empty(trim($_POST["form-textarea-notes"]))) {
-          $data_notes = $_POST["form-textarea-notes"];
+          $data_notes = trim($_POST["form-textarea-notes"]);
       }
 
       if (!empty($data_user) && !empty($data_migraine)) {
