@@ -60,7 +60,6 @@
              /* fetch associative array */
              $userDetails = mysqli_fetch_assoc($result);
          }
-         print_r($userDetails);
 
          // Prepare a select statement
          $sql = "SELECT `migraine_id`, `start_time`, `end_time`, `severity`, `location`, `weather`, `remedy`, `notes`, `duration` FROM `migraine` WHERE `migraine_id` = '$viewMigraine' and `user_id` = '$viewUser'";
@@ -81,9 +80,9 @@ $location = array("Front"=>"Front", "Back"=>"Back", "Left"=>"Left", "Right"=>"Ri
 $weather = array("Sunny"=>"Sunny", "Cloudy"=>"Cloudy", "Foggy"=>"Foggy", "Rainy"=>"Rainy");
 $remedy = array("Imitrex"=>"Imitrex", "Ibuprofen"=>"Ibuprofen");
 
-print_r($userDetails);
-echo "<br><br>";
-print_r($userMigraine);
+// print_r($userDetails);
+// echo "<br><br>";
+// print_r($userMigraine);
 
 ?>
 
@@ -144,7 +143,10 @@ print_r($userMigraine);
           <h1 class="h3 mb-3">Edit Migraine</h1>
 
           <!-- SIGNUP FORM -->
-          <form action="index.php" method="post" enctype="multipart/form-data">
+          <form action="details.php" method="post" enctype="multipart/form-data">
+
+            <input name="form-user-id" type="hidden" value="<?php echo $viewUser ?>" />
+            <input name="form-migraine-id" type="hidden" value="<?php echo $viewMigraine ?>" />
 
             <div class="row mb-0">
               <div class="col">
@@ -179,10 +181,6 @@ print_r($userMigraine);
               <label for="">Location</label>
               <select id="inputLocation" name="form-select-location" class="form-control">
                 <option label=" "></option>
-                <option value="Front">Front</option>
-                <option value="Back">Back</option>
-                <option value="Left">Left</option>
-                <option value="Right">Right</option>
                 <?php
                   foreach ($location as $key => $value):
                     echo "<option " . ($value == $userMigraine["location"] ? ' selected ' : '') . "value='$key'>$value</option>";
@@ -195,10 +193,6 @@ print_r($userMigraine);
               <label for="">Current Weather</label>
               <select id="inputWeather" name="form-select-weather" class="form-control">
                 <option label=" "></option>
-                <option value="Sunny">Sunny</option>
-                <option value="Cloudy">Cloudy</option>
-                <option value="Foggy">Foggy</option>
-                <option value="Rainy">Rainy</option>
                 <?php
                   foreach ($weather as $key => $value):
                     echo "<option " . ($value == $userMigraine["weather"] ? ' selected ' : '') . "value='$key'>$value</option>";
@@ -211,8 +205,6 @@ print_r($userMigraine);
               <label for="">Remedy</label>
               <select id="inputLocation" name="form-select-remedy" class="form-control">
                 <option label=" "></option>
-                <option value="Imitrex">Imitrex</option>
-                <option value="Ibuprofen">Ibuprofen</option>
                 <?php
                   foreach ($remedy as $key => $value):
                     echo "<option " . ($value == $userMigraine["remedy"] ? ' selected ' : '') . "value='$key'>$value</option>";

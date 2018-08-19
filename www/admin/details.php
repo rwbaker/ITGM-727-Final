@@ -23,7 +23,7 @@
  */
 
   //Importing helper functions to keep this page clean...
-
+  include "../includes/functions/editmigraine.php";
 
 
 
@@ -47,33 +47,82 @@
         // desired migraine from query string
         $viewUser = $_GET["user"];
         $viewMigraine = $_GET["migraine"];
+    } elseif (isset($_POST["form-user-id"]) && isset($_POST["form-migraine-id"])) {
+        // desired migrate from POST
+        $viewUser = trim($_POST["form-user-id"]);
+        $viewMigraine = trim($_POST["form-migraine-id"]);
+    } else {
+        echo "viewUser and viewMigraine are blank.";
     }
 
-    // Get SINGLE USER from DB
-    // ----------------------------------------------------------------------------
-    // Standard & reusable db connection
-     include "../includes/helpers/config.php";
-       // Prepare a select statement
-       $sql = "SELECT `user_id`, `first_name`, `last_name`, `email`, `created_at`, `user_type` FROM `user` WHERE user_id = '$viewUser'";
+  // Processing form data when form is submitted
+  // Handles NEW MIGRAINE
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-       if ($result = mysqli_query($link, $sql)) {
-           /* fetch associative array */
-           $userDetails = mysqli_fetch_assoc($result);
-       }
-       // print_r($userDetails);
+      // Create variables
+      $data_user = $data_migraine = "";
+      $data_start = $data_end = $data_severity = $data_location = "";
+      $data_weather = $data_remedy = $data_notes = "";
 
-       // Prepare a select statement
-       $sql = "SELECT `migraine_id`, `start_time`, `end_time`, `severity`, `location`, `weather`, `remedy`, `notes`, `duration` FROM `migraine` WHERE `migraine_id` = '$viewMigraine' and `user_id` = '$viewUser'";
+      if (!empty(trim($_POST["form-user-id"]))) {
+          $data_user = $_POST["form-user-id"];
+      }
+      if (!empty(trim($_POST["form-migraine-id"]))) {
+          $data_migraine = $_POST["form-migraine-id"];
+      }
+      if (!empty(trim($_POST["form-time-start"]))) {
+          $data_start = $_POST["form-time-start"];
+      }
+      if (!empty(trim($_POST["form-time-end"]))) {
+          $data_end = $_POST["form-time-end"];
+      }
+      if (!empty(trim($_POST["form-select-severity"]))) {
+          $data_severity = $_POST["form-select-severity"];
+      }
+      if (!empty(trim($_POST["form-select-location"]))) {
+          $data_location = $_POST["form-select-location"];
+      }
+      if (!empty(trim($_POST["form-select-weather"]))) {
+          $data_weather = $_POST["form-select-weather"];
+      }
+      if (!empty(trim($_POST["form-select-remedy"]))) {
+          $data_remedy = $_POST["form-select-remedy"];
+      }
+      if (!empty(trim($_POST["form-textarea-notes"]))) {
+          $data_notes = $_POST["form-textarea-notes"];
+      }
 
-       if ($result = mysqli_query($link, $sql)) {
-           /* fetch associative array */
-           $userMigraine = mysqli_fetch_assoc($result);
-       }
+      if (!empty($data_user) && !empty($data_migraine)) {
+          editMigraine($data_user, $data_migraine, $data_start, $data_end, $data_severity, $data_location, $data_weather, $data_remedy, $data_notes);
+      }
+  }
 
-       /* close connection */
-       mysqli_close($link);
+  // Get SINGLE USER from DB
+  // ----------------------------------------------------------------------------
+  // Standard & reusable db connection
+   include "../includes/helpers/config.php";
+     // Prepare a select statement
+     $sql = "SELECT `user_id`, `first_name`, `last_name`, `email`, `created_at`, `user_type` FROM `user` WHERE user_id = '$viewUser'";
 
-  $currentMigraine = $userMigraine["migraine_id"];
+     if ($result = mysqli_query($link, $sql)) {
+         /* fetch associative array */
+         $userDetails = mysqli_fetch_assoc($result);
+     }
+     // print_r($userDetails);
+
+     // Prepare a select statement
+     $sql = "SELECT `migraine_id`, `start_time`, `end_time`, `severity`, `location`, `weather`, `remedy`, `notes`, `duration` FROM `migraine` WHERE `migraine_id` = '$viewMigraine' and `user_id` = '$viewUser'";
+
+     if ($result = mysqli_query($link, $sql)) {
+         /* fetch associative array */
+         $userMigraine = mysqli_fetch_assoc($result);
+     }
+
+     /* close connection */
+     mysqli_close($link);
+
+$currentMigraine = $userMigraine["migraine_id"];
+
 
 ?>
 
