@@ -36,6 +36,10 @@ function createUser($firstname, $lastname, $email, $password, $user_type)
   /* execute prepared statement */
     mysqli_stmt_execute($stmt);
     // printf("%d Row inserted.\n", mysqli_stmt_affected_rows($stmt));
+    if (mysqli_stmt_error($stmt)) {
+        printf("Error: %s.\n", mysqli_stmt_error($stmt));
+    }
+
 
     // Redirect to login page
     // @TODO this is a bit hacky... need to figure out how to do this right

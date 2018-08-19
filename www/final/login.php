@@ -26,10 +26,12 @@
 
   // Initialize the session
   // session_start();
+  // print_r("first load: " . $_SESSION);
 
   // Check if the user is already logged in, if yes then redirect him to welcome page
   if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
-      header("location: private/index.php");
+      // print_r("initial load, inside" . $_SESSION);
+      header("location: /~rbaker22/final/private/index.php");
       exit;
   }
 
@@ -91,11 +93,13 @@
                               $_SESSION["lastname"] = $lastname;
                               $_SESSION["user_type"] = $user_type;
 
+                              print_r($_SESSION);
+
                               // Redirect user to welcome page
-                              if ($user_type === "admin") {
-                                  header("location: admin/index.php");
+                              if ($user_type == "admin") {
+                                  header("location: /~rbaker22/final/admin/index.php");
                               } else {
-                                  header("location: private/index.php");
+                                  header("location: /~rbaker22/final/private/index.php");
                               }
                           } else {
                               // Display an error message if password is not valid
