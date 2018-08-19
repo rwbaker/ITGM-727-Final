@@ -73,7 +73,7 @@
        /* close connection */
        mysqli_close($link);
 
-
+  $currentMigraine = $userMigraine["migraine_id"];
 
 ?>
 
@@ -232,7 +232,9 @@
           </div>
 
         <div class="row mt-4 mb-4">
-          <!-- <button type="button" class="btn btn-primary mr-3">Edit</button> -->
+          <?php
+            echo "<a href='edit.php?user=$viewUser&migraine=$currentMigraine' role='button' class='btn btn-primary mr-3'>Edit</a>";
+          ?>
           <!-- <button type="button" class="btn btn-outline-danger">Danger</button> -->
         </div>
 
