@@ -28,6 +28,7 @@ function createMigraine($user_id, $data_start, $data_end, $data_severity, $data_
 
     /* execute prepared statement */
     mysqli_stmt_execute($stmt);
+    // echo mysqli_stmt_error($stmt);
     // printf("%d Row inserted.\n", mysqli_stmt_affected_rows($stmt));
     // @TODO Success Message
 

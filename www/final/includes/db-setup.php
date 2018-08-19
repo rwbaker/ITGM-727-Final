@@ -13,7 +13,7 @@
   $servername = "localhost";
   $username = "root";
   $password = "root";
-  $dbname = "migratrak";
+  $dbname = "migratrak-test";
 
   // Create connection
   $conn = mysqli_connect($servername, $username, $password, $dbname);
@@ -27,7 +27,7 @@
   // $query = $db->exec($sql);
 
   if (mysqli_query($conn, $sql)) {
-    echo "Table MyGuests created successfully";
+      echo "Tables created successfully";
   } else {
       echo "Error creating table: " . mysqli_error($conn);
   }

@@ -92,7 +92,7 @@
                               $_SESSION["user_type"] = $user_type;
 
                               // Redirect user to welcome page
-                              if ($user_type == "admin") {
+                              if ($user_type === "admin") {
                                   header("location: admin/index.php");
                               } else {
                                   header("location: private/index.php");

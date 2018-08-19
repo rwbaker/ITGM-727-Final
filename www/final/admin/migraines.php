@@ -68,11 +68,11 @@
      // ----------------------------------------------------------------------------
        // Standard & reusable db connection
        include "../includes/helpers/config.php";
-
          // Prepare a select statement
          $sql = "SELECT `migraine_id`, `severity`, `location`, `duration`, `start_time` FROM `migraine` WHERE `user_id` = '$viewUser'";
 
          if ($result = mysqli_query($link, $sql)) {
+
              /* fetch associative array */
              while ($row = mysqli_fetch_assoc($result)) {
                  $userMigraines[] = $row;

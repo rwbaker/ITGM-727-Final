@@ -4,7 +4,7 @@
   $DB_SERVER= "localhost";
   $DB_USERNAME = "root";
   $DB_PASSWORD = "root";
-  $DB_NAME = "migratrak";
+  $DB_NAME = "migratrak-test";
 
   /* Attempt to connect to MySQL database */
   $link = mysqli_connect($DB_SERVER, $DB_USERNAME, $DB_PASSWORD, $DB_NAME);

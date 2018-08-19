@@ -216,7 +216,7 @@
           </div>
 
         <div class="row mt-4 mb-4">
-          <button type="button" class="btn btn-primary mr-3">Edit</button>
+          <!-- <button type="button" class="btn btn-primary mr-3">Edit</button> -->
           <!-- <button type="button" class="btn btn-outline-danger">Danger</button> -->
         </div>
 

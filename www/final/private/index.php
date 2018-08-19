@@ -63,10 +63,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $data_remedy = $_POST["form-select-remedy"];
     }
     if (!empty(trim($_POST["form-textarea-notes"]))) {
-        $data_notes = $_POST["form-textarea-notes"];
+        $data_notes = trim($_POST["form-textarea-notes"]);
     }
 
-    if (!empty($_SESSION["id"])) {
+
+    if (isset($_SESSION["id"])) {
         createMigraine($_SESSION["id"], $data_start, $data_end, $data_severity, $data_location, $data_weather, $data_remedy, $data_notes);
     }
 }

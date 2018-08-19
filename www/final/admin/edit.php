@@ -215,9 +215,7 @@ $remedy = array("Imitrex"=>"Imitrex", "Ibuprofen"=>"Ibuprofen");
 
             <div class="form-group">
               <label for="">Notes</label>
-              <textarea class="form-control" id="textareaNotes" name="form-textarea-notes" rows="3">
-                <?php echo $userMigraine["notes"] ?>
-              </textarea>
+              <textarea class="form-control" id="textareaNotes" name="form-textarea-notes" rows="3"><?php echo $userMigraine["notes"] ?></textarea>
             </div>
 
             <button type="submit" name="submit" class="btn btn-primary btn-lg mt-2">Save</button>
