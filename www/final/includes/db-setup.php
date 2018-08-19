@@ -5,15 +5,15 @@
   // mysql_connect('atl-stu-mysql.scad.edu','rbaker22','1b829cbaf8731c78b94cff555c9bc471b8e51016');
   // mysql_select_db('rbaker22');
 
-  // $servername = "atl-stu-mysql.scad.edu";
-  // $username = "rbaker22";
-  // $password = "1b829cbaf8731c78b94cff555c9bc471b8e51016";
-  // $dbname = "rbaker22";
+  $servername = "atl-stu-mysql.scad.edu";
+  $username = "rbaker22";
+  $password = "1b829cbaf8731c78b94cff555c9bc471b8e51016";
+  $dbname = "rbaker22";
 
-  $servername = "localhost";
-  $username = "root";
-  $password = "root";
-  $dbname = "migratrak-test";
+  // $servername = "localhost";
+  // $username = "root";
+  // $password = "root";
+  // $dbname = "migratrak";
 
   // Create connection
   $conn = mysqli_connect($servername, $username, $password, $dbname);
